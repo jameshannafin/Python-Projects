@@ -4,7 +4,9 @@ class npc: #Non player characters
     wpn = "none" #Weapon
     team = "neutral" #Allegiance
 
-
+#////////////////////////////////
+#Python Course Assignment 245////
+#////////////////////////////////
     
 #////////NEUTRALS//////////////
 class farmer(npc):#Child Object
@@ -24,7 +26,15 @@ class nobleman(npc):#Child Object
     def inView(self):
         print("You there! Stop galavanting and come to the great {}'s aid!".format(lastname))
     
-    
+#////////////////////////////////////
+#End Python Course Assignment 245////
+#////////////////////////////////////
+
+
+
+
+
+#Other
 #////////ENEMIES//////////////
 class enemy(npc): #PARENT
     team = 'evil'
