@@ -8,7 +8,7 @@ class npc: #Non player characters
     
 #////////NEUTRALS//////////////
 class farmer(npc):
-    easilyFrightened = true
+    easilyFrightened = True
     
     
 #////////ENEMIES//////////////
@@ -26,4 +26,4 @@ class friendly(npc):#PARENT
 class knight(friendly):
     ap = 50
     wpn = sword
-    hasShield = true
+    hasShield = True
