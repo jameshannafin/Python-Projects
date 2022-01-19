@@ -43,7 +43,7 @@ class ParentWindow(Frame):
         self.lblDisplay.config(text = "Hello {} {}".format(fn,ln))
          
     def cancel(self):
-        self.aster.destroy()
+        self.master.destroy()
         
 
 
