@@ -1,5 +1,5 @@
 
-
+#Probally more imports than i need, but i do not understand the difference 
 import datetime
 import tkinter
 from tkinter import *
@@ -24,15 +24,17 @@ date_yesterday = (date_today - delta_oneDay)
 
 class ParentWindow(Frame):
     def __init__ (self, master):
-        Frame.__init__ (self)
+        Frame.__init__ (self) #***
+
         destination = "No Destination Selected"
         source = "No Source Selected"
-        dailyUpdates = IntVar()
-        self.master = master
-        self.master.resizable(width=False,height=False)
-        self.master.geometry('{}x{}'.format(900,600))
-        self.master.title("File Transfer")
-        self.master.config(bg='darkgray')
+        dailyUpdates = IntVar() #***ERROR
+
+        self.master = master #***
+        self.master.resizable(width=False,height=False) #Cannot resize the window
+        self.master.geometry('{}x{}'.format(900,600)) #Window Size
+        self.master.title("File Transfer") #App title
+        self.master.config(bg='darkgray') #Window Background Color
                           
         
         #Source Label
@@ -87,10 +89,10 @@ class ParentWindow(Frame):
             shutil.move(source+i,destination)
             print("A file has been transferred")
          
-    def close(self):
+    def close(self):#Close the app
         self.master.destroy()
 
-#### ####  #### ####        
+#### #### Transfer Files that are older than 24 hours  #### ####        
     
 ##    if dailyUpdates == 1:
 ##        print("Running the datetime autotransfer module")
@@ -107,13 +109,17 @@ class ParentWindow(Frame):
 ##
 
 
-
+print("Source:" + source)
+print("Daily Updates:" + str(dailyUpdates))
+print("Destination:" + destination)
+print("Todays Date:"+ str(date_today))
+print(":")
+print(":")
 
 if __name__ == "__main__":                  
-    win = Tk()
-    App = ParentWindow(win)
-    print(dailyUpdates)
-    win.mainloop()
+    win = Tk()#Create initial window
+    App = ParentWindow(win)#***
+    win.mainloop()#Loop the program
 
 
 
