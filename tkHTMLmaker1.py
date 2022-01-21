@@ -15,7 +15,7 @@ canvas = tk.Canvas(root, width = 900, height = 900)#Set the size of the canvas
 
 ##Label 1
 lbl_newPage = tk.Label(root,text="Create a new web page")#Create a label with this text
-lbl_newPage.pack(root, side = LEFT )
+lbl_newPage.pack(root,side=LEFT)
 
 lbl_addBody = tk.Label(root,text="Add Content to an existing file")#Create a label with this text
 lbl_addBody.pack(root, side = LEFT )
@@ -40,7 +40,7 @@ newBodyText.pack(side = BOTTOM)
 #### #### Section 5: Button Functions #### ####
 
 ## Open the file upon clicking.
-def open_file()
+def open_file():
     print("Opening a file...")
 ##This will be the button used to submit the new body text into the document
 def add_body():
@@ -82,4 +82,4 @@ webbrowser.open_new_tab(newpage.txt)#Open the new file in browser.. But how do i
 
 
 #### #### Section 9: Other #### ####
-root.mainloop() #**I beleive this just keeps the code looping to allow constant interaction..
+root.mainloop() #*
