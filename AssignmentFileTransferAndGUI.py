@@ -23,20 +23,18 @@ date_yesterday = (date_today - delta_oneDay)
 
 
 class ParentWindow(Frame):
+    
     def __init__ (self, master):
         Frame.__init__ (self) #***
-
+        self.master = master #***
         destination = "No Destination Selected"
         source = "No Source Selected"
         dailyUpdates = IntVar() #***ERROR
-
-        self.master = master #***
         self.master.resizable(width=False,height=False) #Cannot resize the window
         self.master.geometry('{}x{}'.format(900,600)) #Window Size
         self.master.title("File Transfer") #App title
         self.master.config(bg='darkgray') #Window Background Color
                           
-        
         #Source Label
         self.lbl_sourceLabel = Label(self.master,text="Source: ",font=("Helvetica",16),fg='black',bg='lightgray')
         self.lbl_sourceLabel.grid(row=0, column = 0,padx=(30,0),pady=(30,0))
@@ -84,7 +82,7 @@ class ParentWindow(Frame):
        destination= filedialog.askdirectory()
        
     def transfer_all():#Transfer all files from source to destination
-        files = os.listdir(source)
+        files = os.listdir(master.source)
         for i in files:
             shutil.move(source+i,destination)
             print("A file has been transferred")
@@ -113,24 +111,9 @@ print("Source:" + source)
 print("Daily Updates:" + str(dailyUpdates))
 print("Destination:" + destination)
 print("Todays Date:"+ str(date_today))
-print(":")
-print(":")
+
 
 if __name__ == "__main__":                  
     win = Tk()#Create initial window
     App = ParentWindow(win)#***
     win.mainloop()#Loop the program
-
-
-
-
-
-
-
-
-        #self.lbl_selSource = Label(win, text="Click the Button to select a source folder", font=('Aerial 10 bold'))
-        #self.lbl_selSource.grid(row = 2, column = 0,padx=(0,90),pady=(30,0))
-
-        #self.lbl_selDest = Label(win, text="Click the Button to select a destination folder", font=('Aerial 10 bold'))
-        #self.lbl_selDest.grid(row = 4, column = 0,padx=(0,90),pady=(30,0))
-        

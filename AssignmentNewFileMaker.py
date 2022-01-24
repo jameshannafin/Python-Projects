@@ -7,6 +7,7 @@ from tkinter import ttk
 from tkinter import filedialog
 import shutil
 import os
+from webbrowser import open_new_tab
 
 appBuilder = "James Hannafin"
 appBuildDate = datetime.date(2022,1,20)
@@ -53,8 +54,8 @@ class ParentWindow(Frame):
 #### This function to create a new file works when ran in an isolated environment, but here it gives an error saying that I am giving an argument for its not existent parameters...
 
     #### Functions ####
-    def create_file():#WORKING. this function creates a new file.#
-        newPage = open("newpage.txt", "w")#Link a variable with a newly created file with the specified name, if it does not exist already..
+    def create_file(self):#WORKING. this function creates a new file.#
+        newPage = open("newpage.html", "w")#Link a variable with a newly created file with the specified name, if it does not exist already..
         ##The following will write a basic HTML template into the new file
         newPage.write("""
         <!DOCTYPE html>
@@ -69,15 +70,16 @@ class ParentWindow(Frame):
         </html>
         """)
         newPage.close()#Close the file we opened/created because were not changing it right now 
-                
-    def select_file():#Select a file to modify, not working.
+        open_new_tab(newPage)  #***
+
+    def select_file(self):#Select a file to modify, not working.
         print("select file")
-        #selectedFile = filedialog.askopenfilename(initialdir="/")
+        selectedFile = filedialog.askopenfilename(initialdir="/")
        
-    def modify_file():#Add content to an existing file, not working
+    def modify_file(self):#Add content to an existing file, not working
         print("Modify file")
-        #def retrieve_input():
-            #newBodyText = self.ipt_newBody.get("1.0",END)
+        def retrieve_input():
+            newBodyText = self.ipt_newBody.get("1.0",END)
         #Now insert this var into a specic point do I use SQLite?
          
     def close(self):#Close the program
