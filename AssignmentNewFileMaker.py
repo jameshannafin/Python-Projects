@@ -1,20 +1,15 @@
 #### #### #### ####
-    # FILE MAKER 
+    # HTML MAKER 
 #### #### #### ####
     # By James Hannafin
 #### #### #### ####
 
 #### #### IMPORTS #### ####
 import datetime
-import tkinter
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
-import shutil
-import os
 from webbrowser import open_new_tab
-
-appStartDate = datetime.date(2022,1,20)
 
 #Main Parent Frame Window
 class ParentWindow(Frame):
@@ -27,38 +22,39 @@ class ParentWindow(Frame):
         self.master.title("File Transfer") #App Title
         self.master.config(bg='darkgray')#BG Color
                           
-        #Title Label
-        self.lbl_titleLabel = Label(self.master,text="File Maker ",font=("Helvetica",16),fg='black',bg='lightgray')
-        self.lbl_titleLabel.grid(row=0, column = 0,columnspan = 2,padx=(30,0),pady=(30,0))
+        #Title Label - top left
+        self.lbl_titleLabel = Label(self.master,text="File Maker ",font=("Helvetica",16),fg='black',bg='lightgray') #Create a text label with the given parameters
+        self.lbl_titleLabel.grid(row=0, column = 0,columnspan = 2,padx=(0,0),pady=(0,0)) # Position that label on the grid 
 
         #Instructions Label
-        self.lbl_title = Label(self.master,text="Create a new file and modify it select another basic HTML file to modify.")
-        self.lbl_title.grid(row=1, column = 0,columnspan = 3,padx=(0,0),pady=(0,0))
+        self.lbl_title = Label(self.master,text="Create a new file and modify it or select another basic HTML file to modify.")
+        self.lbl_title.grid(row=1, column = 0,columnspan = 3,padx=(50,0),pady=(0,0))
 
         #Selected File Label ***Doesnt Change
         self.lbl_selectedFile = Label(self.master,text=selectedFile)
         self.lbl_selectedFile.grid(row=1, column = 4,padx=(30,0),pady=(30,0))
 
-        #Create File BTN
-        self.btn_createFile= ttk.Button(win, text="Create File", command=self.create_file)
-        self.btn_createFile.grid(row = 2, column = 1,padx=(0,90),pady=(30,0))
-
+        
         #Modify File Text Input Box
         self.ipt_newBody = Text(master)
-        self.ipt_newBody.grid(row = 3, column = 0, rowspan = 2, columnspan = 3)
+        self.ipt_newBody.grid(row = 3, column = 1, rowspan = 2, columnspan = 3)
             
+        #Create File BTN
+        self.btn_createFile= ttk.Button(win, text="Create File", command=self.create_file)
+        self.btn_createFile.grid(row = 5, column = 0,padx=(0,90),pady=(30,0))
+
         #Select File BTN
         self.btn_selFile= ttk.Button(win, text="Select File", command=self.select_file)
-        self.btn_selFile.grid(row = 5, column = 1,padx=(0,90),pady=(30,0))
+        self.btn_selFile.grid(row = 5, column = 2,padx=(0,90),pady=(30,0))
 
         #Modify File Button
         #if selectedFile != "Select a file to modify one":
         self.btn_selDest= ttk.Button(win, text="Modify Selected", command= self.modify_file)
-        self.btn_selDest.grid(row = 5, column = 2,padx=(0,90),pady=(30,0))
+        self.btn_selDest.grid(row = 5, column = 3,padx=(0,90),pady=(30,0))
 
         #Close the app
         self.btn_close = Button(self.master, text = 'Close', width=10, height = 2,command = self.close)
-        self.btn_close.grid(row=5,column=3,padx=(0,90),pady=(30,0))
+        self.btn_close.grid(row=5,column=4,padx=(0,90),pady=(30,0))
 
     #### Functions ####
     def create_file(self):# this function creates a new file.#
