@@ -1,6 +1,8 @@
 
 #### #### IMPORTS #### ####
 import datetime
+from distutils import filelist
+import string
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
@@ -41,12 +43,12 @@ class ParentWindow(Frame): #Main (only) GUI Window
         self.lbl_destinationLabel.grid(row=1, column = 0,padx=(30,0),pady=(30,0))
 
         #Selected Source *** I want these to update when a source or destination selected **question 2
-        self.lbl_source = Label(self.master,text=source,font=("Helvetica",16),fg='black',bg='lightblue')
-        self.lbl_source.grid(row=0,column=3,padx=(30,0),pady=(30,0))
+        self.txt_source = Entry(self.master,font=("Helvetica,16"),fg='black',bg='lightblue')
+        self.txt_source.grid(row=0,column=3,padx=(30,0),pady=(30,0))
 
         #Selected Destination *** I want these to update when a source or destination selected **question 2
-        self.lbl_destination = Label(self.master,text=destination,font=("Helvetica",16),fg='black',bg='lightblue')
-        self.lbl_destination.grid(row=1,column=3,padx=(30,0),pady=(30,0))
+        self.txt_destination = Entry(self.master,font=("Helvetica",16),fg='black',bg='lightblue')
+        self.txt_destination.grid(row=1,column=3,padx=(30,0),pady=(30,0))
 
         #Select Source BTN ##Use the button widget to trigger a function which will open a file dialog 
         self.btn_selSource= ttk.Button(win, text="Select", command=self.select_source)
@@ -64,56 +66,60 @@ class ParentWindow(Frame): #Main (only) GUI Window
         self.btn_close = Button(self.master, text = 'Close', width=10, height = 2,command = self.close)
         self.btn_close.grid(row=6,column=3,padx=(0,90),pady=(30,0))
 
-        #Daily Backup
-        self.btn_dailyBackups = Checkbutton(self.master, text = "Daily Updates",variable=dailyUpdates)
-        self.btn_dailyBackups.grid (row= 6, column = 2)
-
-    
-
     #### Functions ####
 
     #Select a source folder.
     def select_source(self):
         print("Source Changed")#Confirm this in the console
-        self.source= filedialog.askdirectory()
-        self.files = os.listdir(self.source)
-
+        self.txt_source.delete(0,'end')
+        source= filedialog.askdirectory()
+        self.txt_source.insert(0,source)
+       
     #Select a destination folder.
     def select_destination(self):
-        print("Destination Changed")#Confirm this in the console
-        self.destination= filedialog.askdirectory()
+        print("Destination Changed")#Confirm this in the consol
+        self.txt_destination.delete(0,'end')
+        destination = filedialog.askdirectory()
+        self.txt_destination.insert(0,destination)
        
     #Transfer all files from the source to the the destination
     def transfer_all(self):#Transfer all files from source to destination
-        files = os.listdir(self.source)
-        for i in files:
-            shutil.move(self.source+i,self.destination)
-            print("A file has been transferred")
+        oneDay = 86400.00 #Seconds
+        source = self.txt_source.get()
+        destination = self.txt_destination.get()
+        filelist = os.listdir(source)
+        print("Running the datetime autotransfer module")#Debug
+        print("Source:" + source)
+        print("File List:")
+        print(filelist)
+        
+        for i in filelist: #Iterate through each item with a for loop
+
+            #Identify the current file 
+            currentFile = source+"/"+i 
+            print("Checking file...")
+            print("File Path:")
+            print(currentFile)
+            
+            currentFileName = os.path.basename(currentFile)
+            print("File Name:")
+            print(currentFileName)
+
+            currentFileModDateTime =  os.path.getmtime(currentFile) #Ascertain the time the current file was last modified
+            print("File Last Modified:")
+            print(currentFileModDateTime)
+
+        
+            if (currentFileModDateTime > oneDay ): #86,400 seconds are in a day, so if the current file hasnt been modified for over a day it will transfer 
+                shutil.move(currentFile,destination)#Use the shutil module to .move a file to a new folder 
+                print("A file has been transferred")
+
+            
 
     #Close the app
     #   
     def close(self):
         self.master.destroy()
-
-#### #### Transfer Files that are older than 24 hours  #### ####        
-    
-        if self.dailyUpdates == 1: #If the daily backup checkbox is marked..
-            print("Running the datetime autotransfer module")#Debug
-            for i in self.files: #Iterate through each item with a for loop
-                currentFile = self.source+i #Identify the current file 
-                currentFileModDateTime =  os.path.getmtime(currentFile) #Ascertain the time the current file was last modified
-                print("File last modified:" + currentFileModDateTime) #Print that time to the console 
-                print("Yesterday:" + date_yesterday) #Print yesterday to the console 
-                if currentFileModDateTime > date_yesterday: #*** Question 3 If last time the file was modified before yesterday, move it to the destination
-                    shutil.move(currentFile,self.destination)#Use the shutil module to .move a file to a new folder 
-                    print("A file has been transferred")
-
-
-        #Debugging
-        print("Source:" + self.source)
-        print("Daily Updates:" + str(self.dailyUpdates))
-        print("Destination:" + self.destination)
-        print("Todays Date:"+ str(date_today))
 
 ## Main Loop
 if __name__ == "__main__":                  
