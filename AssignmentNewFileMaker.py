@@ -9,6 +9,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
 from webbrowser import open_new_tab
+import os 
 
 #Main Parent Frame Window
 class ParentWindow(Frame):
@@ -37,6 +38,9 @@ class ParentWindow(Frame):
         self.btn_createFile= ttk.Button(win, text="Create File", command=self.create_file) #create a button. Trigger a function on click 
         self.btn_createFile.grid(row = 5, column = 0,padx=(0,90),pady=(30,0))
 
+        #Create File with text  BTN 
+        self.btn_createFileExt= ttk.Button(win, text="Create File with Text", command=self.create_fileExt) #create a button. Trigger a function on click 
+        self.btn_createFileExt.grid(row = 5, column = 2,padx=(0,90),pady=(30,0))
 
         #Modify File Button
         #if selectedFile != "Select a file to modify one":
@@ -69,12 +73,13 @@ class ParentWindow(Frame):
         newPage.close()#Close the file we opened/created because were not changing it right now 
         open_new_tab("newpage.html")  #Open the new page 
 
-       
-    def modify_file(self):#Add content to an existing file, not working
-        print("Modify file")
+    def create_fileExt(self):#Add content to an existing file, not working
         def retrieve_input(self):
             newBodyText = self.ipt_newBody.get("1.0",END)
-            newPage = open("newpage.html", "a")#Append the file created before to get rid of "Stat tuned for more details and add body."
+            i = 0
+            while os.path.exists("newpage%s.html" % i): #Check to see if the file name exists and iterate up by 1 if it does.
+                i+=1
+            newPage = open("newpage%s.html" % i, "w")#Create a new file  and a body.
             newPage.write("""
             <!DOCTYPE html>
             <html lang ='en'>  
@@ -84,7 +89,34 @@ class ParentWindow(Frame):
             </head>  
             <body> 
                     <p>"""
-                    + newBodyText + 
+                    + newBodyText + #Add in new file text
+                    """</p>
+            </body>  
+            </html>
+            """)
+            newPage.close()#Close the file we opened/created because were not changing it right now 
+            open_new_tab("newpage%s.html" % i) 
+        retrieve_input(self)#Run the retrieveInput function
+        
+            
+
+
+       
+    def modify_file(self):#Add content to an existing file, not working
+        print("Modify file")
+        def retrieve_input(self):
+            newBodyText = self.ipt_newBody.get("1.0",END)
+            newPage = open("newpage.html", "w")#Truncate the file and than add a new one with body.
+            newPage.write("""
+            <!DOCTYPE html>
+            <html lang ='en'>  
+            <head>     
+                            <title>Stay Tuned</title>
+                            <meta charset = "utf-8">
+            </head>  
+            <body> 
+                    <p>"""
+                    + newBodyText + #Add in new file text
                     """</p>
             </body>  
             </html>
