@@ -59,8 +59,8 @@ class ParentWindow(Frame): #Main (only) GUI Window
         self.btn_selDest.grid(row = 1, column = 2,padx=(0,90),pady=(30,0))
 
         #Transfer all files Button ## A buttun to manually transfer all files from the source to the destination
-        self.btn_transferAll = Button(self.master, text = 'Transfer All', width=10, height = 2, command = self.transfer_all)
-        self.btn_transferAll.grid(row=6,column=0,padx=(0,0),pady=(30,0))
+        self.btn_transfer = Button(self.master, text = 'Transfer', width=10, height = 2, command = self.transfer)
+        self.btn_transfer.grid(row=6,column=0,padx=(0,0),pady=(30,0))
 
         #Close the app
         self.btn_close = Button(self.master, text = 'Close', width=10, height = 2,command = self.close)
@@ -83,7 +83,7 @@ class ParentWindow(Frame): #Main (only) GUI Window
         self.txt_destination.insert(0,destination)
        
     #Transfer all files from the source to the the destination
-    def transfer_all(self):#Transfer all files from source to destination
+    def transfer(self):#Transfer all files from source to destination
         oneDay = 86400.00 #Seconds
         source = self.txt_source.get()
         destination = self.txt_destination.get()
