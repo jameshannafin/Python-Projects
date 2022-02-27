@@ -1,34 +1,29 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-#
-# Python Ver:   3.5.1
-#
-# Author:       Daniel A. Christie
+
+# Author:       James Hannafin
 #
 # Purpose:      Phonebook Demo. Demonstrating OOP, Tkinter GUI module,
 #               using Tkinter Parent and Child relationships.
 #
 # Tested OS:  This code was written and tested to work with Windows 10.
 
+#Regular Imports
 import os
 from tkinter import *
 import tkinter as tk
 import sqlite3
+from tkinter import messagebox
 
+#Module Imports
+import phonebook_main
+import phonebook_gui
 
-# Be sure to import our other modules 
-# so we can have access to them
-import drill50_phonebook_main
-import drill50_phonebook_gui
-
-
-
+#A function to center the GUI on the screen
 def center_window(self, w, h): # pass in the tkinter frame (master) reference and the w and h
     # get user's screen width and height
     screen_width = self.master.winfo_screenwidth()
     screen_height = self.master.winfo_screenheight()
     # calculate x and y coordinates to paint the app centered on the user's screen
-    x = int((screen_width/2) - (w/2))
+    x = int((screen_width/2) - (w/2)) #Divide height and width by two to find center
     y = int((screen_height/2) - (h/2))
     centerGeo = self.master.geometry('{}x{}+{}+{}'.format(w, h, x, y))
     return centerGeo

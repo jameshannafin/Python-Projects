@@ -1,7 +1,7 @@
 import sqlite3 #import the sqlite3 DB module
 
 conn = sqlite3.connect('assignment222.db')#Connect to the database (this will create one if  that name does not exist) and store it in a variable
-newfilelist = ('information.docx','Hello.txt','myImage.png',\#Create a tuples of new files to sift through
+newfilelist = ('information.docx','Hello.txt','myImage.png',#Create a tuples of new files to sift through
             'myMovie.mpg','World.txt','data.pdf','myPhoto.jpg')
 
 conn = sqlite3.connect('assignment222.db')#Connect to the database (this will create one if  that name does not exist)
