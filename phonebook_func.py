@@ -29,7 +29,7 @@ def center_window(self, w, h): # pass in the tkinter frame (master) reference an
     return centerGeo
 
 
-# catch if the user's clicks on the windows upper-right 'X' to ensure they want to close
+#Confrim the user wants to close the paige
 def ask_quit(self):
     if messagebox.askokcancel("Exit program", "Okay to exit application?"):
         # This closes app
@@ -37,7 +37,7 @@ def ask_quit(self):
         os._exit(0)
 
 
-#=========================================================
+#Create the database and make a connectionn, create the table if it doesnt exist.
 def create_db(self):
     conn = sqlite3.connect('db_phonebook.db')
     with conn:
@@ -50,10 +50,9 @@ def create_db(self):
             col_phone TEXT, \
             col_email TEXT \
             );")
-        # You must commit() to save changes & close the database connection
-        conn.commit()
+        conn.commit()#  commit() to save changes and than close the connection
     conn.close()
-    first_run(self)
+    first_run(self) #Run this function at the end
 
 
 def first_run(self):
