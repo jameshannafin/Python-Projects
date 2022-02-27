@@ -1,7 +1,7 @@
 # Python-Projects
 
 These are some of my larger Python projects I made during my bootcamp.
-They include various libraries and frameworks including SQL, Django, and Tkinter.
+They include various libraries and frameworks including SQL, Django, and Tkinter. I also make use of virtual environments.
 
 1. Phonebook Project
 
